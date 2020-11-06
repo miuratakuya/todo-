@@ -1,1 +1,73 @@
-新規
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDo App</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div id="app">
+    <h1>ToDoリスト</h1>
+
+    <!-- ボタン -->
+    <label v-for="label in options">
+      <input type="radio"
+      v-model="current"
+      v-bind:value="label.value">{{ label.label }}
+    </label>
+
+    {{ computedTodos.length }} 件
+    <!-- ボタン終了 -->
+  
+    <!-- メインリスト -->
+    <table>
+      <!-- テーブルヘッダー -->
+      <thead v-pre>
+        <tr>
+          <th class="id">ID</th>
+          <th class="comment">コメント</th>
+          <th class="state">状態</th>
+          <th class="button">-</th>
+        </tr>
+      </thead>
+      <!-- ボディ -->
+      <tbody>
+        <tr v-for="item in computedTodos"
+          v-bind:key="item.id"
+          v-bind:class="{done:item.state}">
+          <th>{{ item.id }}</th>
+          <td>{{ item.comment }}</td>
+          <td class="state">
+            <button v-on:click="doChangeState(item)">
+              {{ labels[item.state] }}
+            </button>
+          </td>
+          <td class="button">
+            <button v-on:click="doRemove(item)">
+              削除 
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- メインリスト終了 -->
+
+    <!-- 新しい作業追加 -->
+    <h1>新しい作業の追加</h1>
+    <form v-on:submit.prevent="doAdd" class="add-form">
+      コメント <input type="text" ref="comment">
+      <button type="submit">追加</button>
+    </form>
+    <!-- 新しい作業終了 -->
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
