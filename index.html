@@ -12,16 +12,16 @@
   <div id="app">
     <h1>ToDoリスト</h1>
 
+
     <!-- ボタン -->
     <label v-for="label in options">
-      <input type="radio"
-      v-model="current"
-      v-bind:value="label.value">{{ label.label }}
+      <input type="radio" v-model="current" v-bind:value="label.value">{{ label.label }}
     </label>
 
     {{ computedTodos.length }} 件
     <!-- ボタン終了 -->
-  
+
+
     <!-- メインリスト -->
     <table>
       <!-- テーブルヘッダー -->
@@ -35,39 +35,47 @@
       </thead>
       <!-- ボディ -->
       <tbody>
-        <tr v-for="item in computedTodos"
-          v-bind:key="item.id"
-          v-bind:class="{done:item.state}">
+        <tr v-for="item in computedTodos" :key="item.id" :class="{done:item.state}">
           <th>{{ item.id }}</th>
           <td>{{ item.comment }}</td>
+          <!-- 状態変更ボタン -->
           <td class="state">
-            <button v-on:click="doChangeState(item)">
+            <button v-on:click="doChangeState(item)" class="btn">
               {{ labels[item.state] }}
             </button>
           </td>
+          <!-- 削除ボタン -->
           <td class="button">
-            <button v-on:click="doRemove(item)">
-              削除 
+            <button v-on:click="doRemove(item)" class="btn">
+              削除
             </button>
           </td>
         </tr>
       </tbody>
     </table>
-    
+
     <!-- メインリスト終了 -->
 
     <!-- 新しい作業追加 -->
-    <h1>新しい作業の追加</h1>
-    <form v-on:submit.prevent="doAdd" class="add-form">
-      コメント <input type="text" ref="comment">
-      <button type="submit">追加</button>
-    </form>
+    <h2>新しい作業の追加</h2>
+    <button @click='openModal' class="btn">追加する</button>
+
+    <div id="overlay" v-show="modalShow">
+      <div id="content">
+        <a href="">close</a>
+        <form v-on:submit.prevent="doAdd" class="add-form">
+          <input type="text" ref="comment" class="addTodo">
+          <button type="submit" class="btn btnAdd" @click="closeModal">追加</button>
+        </form>
+      </div>
+    </div>
     <!-- 新しい作業終了 -->
   </div>
 
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="main.js"></script>
+  <!-- <script src="modal.js"></script> -->
 </body>
 
 </html>

@@ -5,7 +5,7 @@ var todoStorage = {
     todos.forEach(function (todo, index) {
       todo.id = index
     })
-    todoStorage.uid = todos.length
+    todoStorage.uid = todos.length+1
     return todos
   },
   save: function (todos) {
@@ -14,8 +14,12 @@ var todoStorage = {
 }
 
 
+
+
+
 const app = new Vue({
   el: '#app',
+
 
   data: {
     todos: [],
@@ -24,8 +28,10 @@ const app = new Vue({
       { value: -1, label: 'すべて' },
       { value: 0, label: '作業中' },
       { value: 1, label: '完了' }
-    ]
+    ],
+    modalShow: false,
   },
+
 
   computed: {
 
@@ -41,6 +47,7 @@ const app = new Vue({
       }, {})
     }
   },
+
 
   methods: {
     // todo追加処理
@@ -69,7 +76,15 @@ const app = new Vue({
       if(confirm('削除しますか？')) {
         this.todos.splice(index,1)
       }
-    }
+    },
+
+    openModal: function() {
+      this.modalShow = true
+    },
+    closeModal: function() {
+      this.modalShow  = false
+    
+  },
   },
 
 
