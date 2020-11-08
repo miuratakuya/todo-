@@ -14,12 +14,8 @@ var todoStorage = {
 }
 
 
-
-
-
-const app = new Vue({
+new Vue({
   el: '#app',
-
 
   data: {
     todos: [],
@@ -81,12 +77,12 @@ const app = new Vue({
     openModal: function() {
       this.modalShow = true
     },
+
     closeModal: function() {
       this.modalShow  = false
     
   },
   },
-
 
 
   watch: {

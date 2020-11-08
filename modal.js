@@ -1,18 +1,22 @@
-// const app = new Vue({
-//   el: '#app',
-//   data: {
-//     modalShow: false
-//   },
-//   methods: {
-//     openModal: function() {
-//       this.modalShow = true
-//     },
-//     closeModal: function() {
-//       this.modalShow  = false
-//     },
-//   },
-// })
+// var component = {
+//   template: "<p>vue</p>",
+// }
+Vue.component('show-modal', {
+  template : `
+  <div id="overlay" v-show="modalShow" @click="closeModal">
+  <div id="content">
+    <button @click="closeModal">close</button>
+    <form @submit.prevent="doAdd" class="add-form">
+      <input type="text" ref="comment" class="addTodo">
+      <button type="submit" class="btn btnAdd" @click="closeModal">追加</button>
+    </form>
+  </div>
+</div>`,  
 
-// 一回一回レンダリングしないと機能がしない
-// 追加する、削除するなどの新しく追加いた機能が作動しない
+methods : {
+  clickEvent: function() {
+    this.$emit('from-child')
+    }
+  },
+})
 

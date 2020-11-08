@@ -56,26 +56,29 @@
 
     <!-- メインリスト終了 -->
 
-    <!-- 新しい作業追加 -->
-    <h2>新しい作業の追加</h2>
-    <button @click='openModal' class="btn">追加する</button>
-
-    <div id="overlay" v-show="modalShow">
-      <div id="content">
-        <a href="">close</a>
-        <form v-on:submit.prevent="doAdd" class="add-form">
-          <input type="text" ref="comment" class="addTodo">
-          <button type="submit" class="btn btnAdd" @click="closeModal">追加</button>
-        </form>
-      </div>
-    </div>
-    <!-- 新しい作業終了 -->
+  <!-- 新しい作業追加 -->
+  <h2>新しい作業の追加</h2>
+  <!-- 追加ボタン -->
+  <button @click='openModal' class="btn">追加する</button>
+  <show-modal v-show="modalShow" @from-child="closeModal"></show-modal>
+  <!-- 新しい作業終了 -->
   </div>
 
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="modal.js"></script>
   <script src="main.js"></script>
   <!-- <script src="modal.js"></script> -->
 </body>
 
 </html>
+
+<!-- <div id="overlay" v-show="modalShow">
+  <div id="content">
+    <a href="">close</a>
+    <form @submit.prevent="doAdd" class="add-form">
+      <input type="text" ref="comment" class="addTodo">
+      <button type="submit" class="btn btnAdd" @click="closeModal">追加</button>
+    </form>
+  </div>
+</div> -->
